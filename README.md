@@ -4,7 +4,7 @@
 
 #### 1. Overview
 
-This project focuses on predicting machinery failures based on sensor data. By analyzing various metrics collected from machines, such as temperature, pressure, and other performance indicators, the model helps to identify early signs of potential failures. The goal is to implement machine learning models to forecast when a machine is likely to fail, allowing for proactive maintenance and reduced downtime.
+Predictive maintenance involves forecasting machinery failures using historical sensor data. This project uses machine learning to classify failure events, addressing the challenges of class imbalance and ensuring the model generalizes well to real-world scenarios.
 
 #### 2. Data
 
@@ -22,33 +22,48 @@ The data includes historical sensor readings and failure information, which allo
 1. Data Preprocessing
 2. Data Splitting
 3. Modeling
-  - Random Forest Classifier: A decision tree ensemble method that works well for complex datasets.
-  - XGBoost: An optimized gradient boosting technique for better performance.
-  - LSTM (Optional): A Long Short-Term Memory network was also considered for time-series data modeling, leveraging the sequential nature of the sensor readings.
-4. Hyperparameter Tuning
-5. Evaluation
+  - Built a Random Forest Classifier to predict machinery failures.
+  - Conducted hyperparameter tuning using GridSearchCV to optimize the model.
+4. Evaluation
+5. Optimization to class weights and feature selection to improve recall on failure class.
 
 #### 4. Key Findings
       
-Class Imbalance:
+Evaluation Metrics:
+- Accuracy: ~99.93%
+- ROC-AUC: ~1.00
 
-- The confusion matrix and classification report show the model's difficulty in predicting the minority class (machinery failures). Despite high overall accuracy (0.9982), it struggles with recall and precision for failures (class 1).
-- Precision for Class 1 (Failures) is very low, indicating that the model is not good at detecting failures without predicting many false positives.
+Test Set Evaluation:
+- ROC-AUC Score: 0.766
+- Improved recall and precision for the minority class after SMOTE and hyperparameter tuning.
 
-Feature Importance:
-- The Random Forest model provides feature importances that help you understand which sensor metrics and engineered features are most predictive of failure. This insight is valuable for improving the model and identifying key sensors to monitor in real-time.
+Feature Importance: Top features driving model predictions:
 
-ROC-AUC Score:
-- The ROC-AUC Score (0.8842) is good, indicating that the model performs well when considering probabilistic predictions. This is better than raw accuracy because it takes into account the ability to rank predictions correctly, which is crucial in imbalanced classification problems.
+- metric4
+- metric2
+- metric5
+- metric6
+- metric1
 
-Class Weights and Handling Imbalance:
-- The class imbalance problem is clear from the output. By incorporating class weights in both Random Forest and XGBoost, the revised code attempts to address this by penalizing misclassifications of the minority class (failures).
+#### 5. Challenges
 
-#### 5. Further Improvements:
+Severe Class Imbalance:
+- Failures accounted for less than 0.1% of the dataset.
+- Addressed using SMOTE and class weighting.
 
-- Consider using SMOTE or other resampling techniques to address the severe class imbalance.
- - Fine-tune the decision threshold for classifying failures to increase the recall for the minority class, depending on the business requirements for detecting failures.
+Model Overfitting:
+- High cross-validation accuracy but struggled with minority class predictions.
+- Addressed with feature engineering and hyperparameter tuning.
 
-#### 6. Source
+Feature Correlation:
+- Some sensor metrics exhibited high correlation, requiring careful selection and scaling.
 
-https://www.kaggle.com/datasets/hiimanshuagarwal/predictive-maintenance-dataset
+Future Improvements
+
+- Exploration of Advanced Models: Experiment with gradient boosting models (e.g., XGBoost, LightGBM) for better handling of imbalanced data.
+- Temporal Analysis: Incorporate temporal patterns in the dataset using sequence-based models like LSTMs.
+- Explainability: Use tools like SHAP or LIME to interpret model predictions.
+
+### Source
+
+    
