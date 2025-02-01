@@ -66,5 +66,4 @@ Future Improvements
 
 ### Source
 
-https://www.kaggle.com/datasets/hiimanshuagarwal/predictive-maintenance-dataset
-    
+Dataset: [Predictive Maintenance Dataset on Kaggle](https://www.kaggle.com/datasets/hiimanshuagarwal/predictive-maintenance-dataset)  
